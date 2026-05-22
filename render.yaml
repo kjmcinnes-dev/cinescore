@@ -1,18 +1,17 @@
 services:
   - type: web
-    name: cinescore
+    name: cinescore-app
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
+    region: oregon
+    buildCommand: npm install --include=dev && npm run build
     startCommand: node dist/index.cjs
-    disk:
-      name: cinescore-data
-      mountPath: /data
-      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
       - key: DATA_DIR
-        value: /data
+        value: /tmp
       - key: PORT
         value: 10000
+      - key: NODE_VERSION
+        value: 20.19.2

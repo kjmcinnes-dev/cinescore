@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: cinescore
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: node dist/index.cjs
+    disk:
+      name: cinescore-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /data
+      - key: PORT
+        value: 10000
